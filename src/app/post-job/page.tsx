@@ -22,17 +22,19 @@ const JobPage = () => {
                 },
                 body: JSON.stringify({ title, location, description, salary, company })
             })
-            const result= await response.json();
-            if(result.redirected){
-                window.location.href=result.url
+            const result = await response.json();
+            if (result.redirected) {
+                window.location.href = result.url
             }
-             window.location.href='/jobs'
-        } catch (error: any) {
-            console.log(error?.message)
+            window.location.href = '/jobs'
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.error(error.message)
+            }
         } finally {
             setIsloading(false)
         }
-      
+
     }
     return (
         <div className="flex justify-center items-center mt-10 px-4">

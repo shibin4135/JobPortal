@@ -26,8 +26,10 @@ const JobPage = () => {
       const response = await fetch('/api/get-jobs');
       const result = await response.json();
       setJobs(result.jobs);
-    } catch (error: any) {
-      console.error('Something went wrong', error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message)
+      }
     } finally {
       setLoading(false);
     }
@@ -37,24 +39,25 @@ const JobPage = () => {
     fetchJobs();
   }, []);
 
-  const fetchOnQuery = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `/api/fetch-by-query?title=${title}&location=${location}`
-      );
-      const result = await response.json();
-      setJobs(result.result);
-    } catch (error) {
-      console.log('Something went wrong');
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   useEffect(() => {
-    fetchOnQuery();
-  }, [title, location,fetchOnQuery]);
+    const fetchOnQuery = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `/api/fetch-by-query?title=${title}&location=${location}`
+        );
+        const result = await response.json();
+        setJobs(result.result);
+      } catch {
+        console.log('Something went wrong');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOnQuery()
+  }, [title, location]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-4 py-12">
