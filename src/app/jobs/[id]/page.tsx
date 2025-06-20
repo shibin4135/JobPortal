@@ -80,7 +80,7 @@ const JobDetail = async ({ params }: { params: Promise<{ id: string }> }) => {
                   <Briefcase className="w-10 h-10 text-red-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Job Not Found</h3>
-                <p className="text-xl text-red-600 font-medium">The job you're looking for doesn't exist.</p>
+                <p className="text-xl text-red-600 font-medium">The job youre looking for doesnt exist.</p>
               </div>
             )}
           </div>
