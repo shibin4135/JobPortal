@@ -54,7 +54,7 @@ const JobPage = () => {
 
   useEffect(() => {
     fetchOnQuery();
-  }, [title, location]);
+  }, [title, location,fetchOnQuery]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-4 py-12">
